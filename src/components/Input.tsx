@@ -96,6 +96,11 @@ export default function Input({ onSubmit, disabled }: Props) {
         </span>
       </div>
 
+      <p className="text-xs text-zinc-600">
+        Racing your own runs? On Strava, open an activity and choose{' '}
+        <span className="text-zinc-400">··· → Export GPX</span>, then drop the files here.
+      </p>
+
       {parseErr && <p className="text-xs text-amber-400">{parseErr}</p>}
 
       {parsed.length > 0 && (

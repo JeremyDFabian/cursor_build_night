@@ -27,7 +27,7 @@ The dev server runs on `http://localhost:5173/`.
 
 The parser pulls distance, total time, and (optionally) time-of-day. If no explicit per-kilometer splits appear, it assumes a uniform pace across the run.
 
-**GPX** — upload one or more files exported from a watch or training app. Per-kilometer splits are computed from trackpoints with haversine distance and linear interpolation.
+**GPX** — upload one or more files exported from a watch or training app. To race your own Strava runs, open an activity and choose `··· → Export GPX`, then drop the files here. Per-kilometer splits are computed from trackpoints with haversine distance and linear interpolation.
 
 ## How the race works
 
