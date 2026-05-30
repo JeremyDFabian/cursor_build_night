@@ -4,7 +4,7 @@ type Props = {
 
 export default function FooterCta({ onStart }: Props) {
   return (
-    <section className="space-y-4 border-t border-zinc-900 pt-10 text-center">
+    <section className="space-y-4 border-t border-zinc-800 pt-10 text-center">
       <h2 className="font-sans text-2xl font-extrabold tracking-tight text-zinc-50">
         Ready?
       </h2>
