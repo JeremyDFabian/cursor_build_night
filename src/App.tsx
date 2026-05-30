@@ -2,14 +2,18 @@ import { useMemo, useState } from 'react';
 import Input from './components/Input';
 import Track from './components/Track';
 import Verdict from './components/Verdict';
+import Landing from './components/landing/Landing';
 import { buildRace, computeVerdict } from './lib/race';
 import type { Run } from './types';
+
+type View = 'landing' | 'tool';
 
 type Status =
   | { kind: 'idle' }
   | { kind: 'ready'; runs: Run[]; verdictVisible: boolean };
 
 export default function App() {
+  const [view, setView] = useState<View>('landing');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
 
   const runs = status.kind === 'ready' ? status.runs : null;
@@ -28,10 +32,32 @@ export default function App() {
     setStatus({ kind: 'idle' });
   }
 
+  function backToLanding() {
+    setStatus({ kind: 'idle' });
+    setView('landing');
+  }
+
+  if (view === 'landing') {
+    return (
+      <main className="mx-auto max-w-2xl px-6 py-16">
+        <Landing onStart={() => setView('tool')} />
+      </main>
+    );
+  }
+
   return (
     <main className="mx-auto max-w-2xl px-6 py-16 space-y-8">
       <header>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-100">Phantom Runner</h1>
+        <button
+          type="button"
+          onClick={backToLanding}
+          className="text-xs text-zinc-500 underline-offset-4 hover:text-zinc-300 hover:underline"
+        >
+          ← Phantom Runner
+        </button>
+        <h1 className="mt-2 text-2xl font-bold tracking-tight text-zinc-100">
+          Phantom Runner
+        </h1>
         <p className="mt-1 text-sm text-zinc-500">
           Paste your last few runs. Watch them race.
         </p>
