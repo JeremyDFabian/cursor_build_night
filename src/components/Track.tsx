@@ -5,6 +5,7 @@ import { laneKmAt } from '../lib/race';
 type Props = {
   race: Race;
   onDone?: () => void;
+  autoPlay?: boolean;
 };
 
 const ANIM_DURATION_MS = 8000;
@@ -15,8 +16,8 @@ const SVG_WIDTH = 640;
 
 type Phase = 'idle' | 'playing' | 'done';
 
-export default function Track({ race, onDone }: Props) {
-  const [phase, setPhase] = useState<Phase>('idle');
+export default function Track({ race, onDone, autoPlay = false }: Props) {
+  const [phase, setPhase] = useState<Phase>(autoPlay ? 'playing' : 'idle');
   const [tNorm, setTNorm] = useState(0);
   const rafRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
@@ -24,9 +25,10 @@ export default function Track({ race, onDone }: Props) {
   doneRef.current = onDone;
 
   useEffect(() => {
-    setPhase('idle');
+    setPhase(autoPlay ? 'playing' : 'idle');
     setTNorm(0);
-  }, [race]);
+    startRef.current = null;
+  }, [race, autoPlay]);
 
   useEffect(() => {
     if (phase !== 'playing') return;
