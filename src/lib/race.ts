@@ -43,6 +43,15 @@ export function buildRace(runs: Run[]): Race {
   return { lanes, tMaxSec, maxDistanceKm };
 }
 
+export function lanePaces(lane: Lane): number[] {
+  const c = lane.cumulative;
+  const paces: number[] = [];
+  for (let i = 1; i < c.length; i++) {
+    paces.push(c[i].seconds - c[i - 1].seconds);
+  }
+  return paces;
+}
+
 export function laneKmAt(lane: Lane, realTimeSec: number): number {
   const c = lane.cumulative;
   if (realTimeSec <= 0) return 0;

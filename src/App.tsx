@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import Input from './components/Input';
 import Track from './components/Track';
+import PaceChart from './components/PaceChart';
 import Verdict from './components/Verdict';
 import Landing from './components/landing/Landing';
 import { buildRace, computeVerdict } from './lib/race';
@@ -68,6 +69,7 @@ export default function App() {
       {status.kind === 'ready' && race && verdict && (
         <>
           <Track race={race} onDone={handleRaceDone} />
+          <PaceChart race={race} verdict={verdict} visible={status.verdictVisible} />
           <Verdict verdict={verdict} visible={status.verdictVisible} />
           <button
             type="button"
